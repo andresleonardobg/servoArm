@@ -28,7 +28,7 @@ void draw(){
   p2.slider();
   p3.slider();
 
-  float m = map(p.posX, 10, 470, 0, 255);
+  float m = map(p.posX, 10, 470, 0, 180);
   int m2 = int(m);
   textSize(20);
   text(m2, 200, 300);

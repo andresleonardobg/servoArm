@@ -1,19 +1,25 @@
-int led = 9;           // the PWM pin the LED is attached to
+#include <Servo.h>
+
+Servo myServo;
 int valor;
+
 
 // the setup routine runs once when you press reset:
 void setup() {
-  // declare pin 9 to be an output:
-  pinMode(led, OUTPUT);
   Serial.begin(9600);
+  myServo.attach(10);
 }
 
 // the loop routine runs over and over again forever:
-void loop() {
+void loop(){
 
-  while (Serial.available()){
-    valor = Serial.read();
-    analogWrite(led, valor);
-    }
-  
+
+  if(Serial.available()) //Detecta si hay alguna entrada por serial
+   {
+      valor = Serial.read();
+      
+      myServo.write(valor); //Mueve el servo a la posición entrada
+   }
+   
+   delay(15);
 }
