@@ -1,3 +1,6 @@
+import processing.serial.*;
+Serial myPort;
+
 potenciometro p;
 potenciometro p2;
 potenciometro p3;
@@ -5,6 +8,13 @@ potenciometro p3;
 void setup(){
   //Tamaño de la ventana
   size(500, 500);
+
+  //Serial
+  String portName = Serial.list()[0];
+  println(Serial.list());
+  myPort = new Serial(this, "COM3", 9600);
+
+  //Objetos
   p = new potenciometro(20);
   p2 = new potenciometro(100);
   p3 = new potenciometro(200);
@@ -18,11 +28,11 @@ void draw(){
   p2.slider();
   p3.slider();
 
-  float m = map(p.posX, 10, 470, 0, 100);
-
+  float m = map(p.posX, 10, 470, 0, 255);
+  int m2 = int(m);
   textSize(20);
-  text(p.posX, 200, 400);
-  text(m, 200, 300);
+  text(m2, 200, 300);
+  myPort.write(m2);
 }
 
 void mousePressed() {
